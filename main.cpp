@@ -2,6 +2,39 @@
 #include <vector>
 #include <string>
 
+
+class treeNode
+{
+private:
+    int value;
+    std::vector<treeNode> sons;
+public:
+    treeNode(int n) {
+        value = n;
+    }
+    treeNode insert(treeNode t, int n);
+};
+
+treeNode treeNode::insert(treeNode t, int n) {
+    if (t.sons.size() == 0) {
+        t.sons.push_back(treeNode(n));
+        return t;
+    }
+    else {
+        for(int i = 0; i < t.sons.size(); i++) {
+            if (t.sons[i].value < n) {
+                t.sons[i] = insert(t.sons[i], n);
+            }
+        }
+        return t;
+    }
+}
+
+
+
+
+
+
 std::vector<int> subVector(std::vector<int> v, int begin, int end) {
     std::vector<int> res;
 
@@ -15,7 +48,7 @@ std::vector<int> subVector(std::vector<int> v, int begin, int end) {
 std::vector<int> readVector() {
     char token;
     std::vector<int> v;
-
+ 
     getchar();
     while((token = getchar()) != EOF) { 
         if( token == '\n') {break;}  
@@ -28,7 +61,7 @@ std::vector<int> readVector() {
 std::string printVector(std::vector<int> vector) {
     std::string out;
 
-    for (int i : vector) {
+    for (int i = 0; i < vector.size(); i++) {
         out.push_back(i);
         out.push_back(',');
         out.push_back(' ');
@@ -37,23 +70,14 @@ std::string printVector(std::vector<int> vector) {
     return out.substr(0, out.size()-2);
 }
 
-std::vector<int> getSequence(std::vector<int> v, std::vector<int> res) {
-    if ( v.size() == 0) {
-        return res;
-    } if ( res.size() == 0) {
-        res.push_back(v[0]);
-        return getSequence(subVector(v, 1, v.size()), res);
-    } else if ( v[0] >= res[res.size() - 1]) {
-        res.push_back(v[0]);
-        return getSequence(subVector(v, 1, v.size()), res);
-    } else {
-        int i = res.size()-1;
-        while(v[0] < res[i]) {
-            i--;
-        }
-        
-    }
 
+
+std::vector<int> getSequence(std::vector<int> v) {
+    treeNode tree(v[0]);
+
+    for (int i = 1; i < v.size(); i++) {
+        tree = tree.insert(tree, v[i]);
+    }
 }
 
 int main() {
