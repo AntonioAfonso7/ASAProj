@@ -12,21 +12,19 @@ public:
     treeNode(int n) {
         value = n;
     }
-    treeNode insert(treeNode t, int n);
+    void insert(treeNode t, int n);
 };
 
-treeNode treeNode::insert(treeNode t, int n) {
+void treeNode::insert(treeNode t, int n) {
     if (t.sons.size() == 0) {
         t.sons.push_back(treeNode(n));
-        return t;
     }
     else {
         for(int i = 0; i < t.sons.size(); i++) {
             if (t.sons[i].value < n) {
-                t.sons[i] = insert(t.sons[i], n);
+                t.sons[i].insert(t.sons[i], n);
             }
         }
-        return t;
     }
 }
 
@@ -76,7 +74,7 @@ std::vector<int> getSequence(std::vector<int> v) {
     treeNode tree(v[0]);
 
     for (int i = 1; i < v.size(); i++) {
-        tree = tree.insert(tree, v[i]);
+        tree.insert(tree, v[i]);
     }
 }
 
