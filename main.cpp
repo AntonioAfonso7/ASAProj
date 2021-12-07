@@ -19,15 +19,18 @@ public:
     void print();
 };
 
-void treeNode::print() {
+void treeNode::print()
+{
     std::cout << value << " -> ";
 
-    for(int i = 0; i < sons.size(); i++) {
+    for (int i = 0; i < sons.size(); i++)
+    {
         std::cout << sons[i].value << " | ";
     }
     std::cout << std::endl;
 
-    for(int i = 0; i < sons.size(); i++) {
+    for (int i = 0; i < sons.size(); i++)
+    {
         sons[i].print();
     }
 }
@@ -65,26 +68,41 @@ std::vector<int> subVector(std::vector<int> v, int begin, int end)
 
 std::vector<int> readVector(std::vector<int> &v, std::string input)
 {
-    for(int i = 0; i < input.size(); i++) 
+    int token = 0;
+
+    for (int i = 0; i < input.size(); i++)
     {
         if (input[i] != ' ')
-            v.push_back(input[i] - 48);
+        {
+            token = token * 10;
+            token += (input[i] - 48);
+        }
+        else
+        {
+            v.push_back(token);
+            token = 0;
+        }
     }
+    if (token != 0)
+    {
+        v.push_back(token);
+    }
+
     return v;
 }
 
-std::string printVector(std::vector<int> vector)
+void printVector(std::vector<int> vector)
 {
     std::string out;
 
     for (int i = 0; i < vector.size(); i++)
     {
-        out.push_back(vector[i] + 48);
-        out.push_back(',');
-        out.push_back(' ');
+        std::cout << vector[i];
+        std::cout << ',';
+        std::cout << ' ';
     }
 
-    return out.substr(0, out.size() - 2);
+    std::cout << std::endl;
 }
 
 void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector<int> curArr)
@@ -153,7 +171,11 @@ int main()
 
         // std::cout << input << std::endl;
         readVector(v, input);
-        std::cout << "Vetor: " << printVector(v) << std::endl << std::endl << std::endl;
+        std::cout << "Vetor: ";
+        printVector(v);
+        std::cout << std::endl
+                  << std::endl
+                  << std::endl;
 
         treeNode tree = getTree(v);
 
@@ -164,10 +186,13 @@ int main()
 
         filterMax(table);
 
-        for(int i = 0; i < table.size(); i++) {
-            std::cout << printVector(table[i]) << std::endl;
+        for (int i = 0; i < table.size(); i++)
+        {
+            printVector(table[i]);
         }
     }
 
     return 0;
 }
+
+// 0 8 4 12 2 10 6 14 1 9 5 13 3 11 7 15
