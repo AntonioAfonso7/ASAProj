@@ -13,20 +13,26 @@ public:
     {
         value = n;
     }
-    void insert(treeNode t, int n);
+    void insert(treeNode &t, int n);
     std::vector<treeNode> getSons() { return sons; }
     int getValue() { return value; }
     void print();
 };
 
 void treeNode::print() {
-    std::cout << value << std::endl;
+    std::cout << value << " -> ";
+
+    for(int i = 0; i < sons.size(); i++) {
+        std::cout << sons[i].value << " | ";
+    }
+    std::cout << std::endl;
+
     for(int i = 0; i < sons.size(); i++) {
         sons[i].print();
     }
 }
 
-void treeNode::insert(treeNode t, int n)
+void treeNode::insert(treeNode &t, int n)
 {
     if (t.sons.size() == 0)
     {
@@ -41,6 +47,7 @@ void treeNode::insert(treeNode t, int n)
                 t.sons[i].insert(t.sons[i], n);
             }
         }
+        t.sons.push_back(treeNode(n));
     }
 }
 
@@ -61,7 +68,7 @@ std::vector<int> readVector(std::vector<int> &v, std::string input)
     for(int i = 0; i < input.size(); i++) 
     {
         if (input[i] != ' ')
-            v.push_back((int)input[i]);
+            v.push_back(input[i] - 48);
     }
     return v;
 }
@@ -72,7 +79,7 @@ std::string printVector(std::vector<int> vector)
 
     for (int i = 0; i < vector.size(); i++)
     {
-        out.push_back(vector[i]);
+        out.push_back(vector[i] + 48);
         out.push_back(',');
         out.push_back(' ');
     }
@@ -80,10 +87,11 @@ std::string printVector(std::vector<int> vector)
     return out.substr(0, out.size() - 2);
 }
 
-void getAllVectors(treeNode t, std::vector<std::vector<int> > dest, std::vector<int> curArr)
+void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector<int> curArr)
 {
     if (t.getSons().size() == 0)
     {
+        curArr.push_back(t.getValue());
         dest.push_back(curArr);
     }
     else
@@ -99,26 +107,26 @@ void getAllVectors(treeNode t, std::vector<std::vector<int> > dest, std::vector<
 
 void filterMax(std::vector<std::vector<int> > &table)
 {
+    std::vector<std::vector<int> > tmp;
+
     int max_size = 0;
-    std::cout << "test" << std::endl;
     for (int i = 0; i < table.size(); i++)
     {
         if (table[i].size() > max_size)
         {
             max_size = table[i].size();
-            std::cout << i << std::endl;
         }
     }
-    
 
-    std::vector<std::vector<int> >::iterator iterator;
-    for (iterator = table.begin(); iterator != table.end(); iterator++)
+    for (int i = 0; i < table.size(); i++)
     {
-        if ((*iterator).size() != max_size)
+        if (table[i].size() == max_size)
         {
-            table.erase(iterator);
+            tmp.push_back(table[i]);
         }
     }
+
+    table = tmp;
 }
 
 treeNode getTree(std::vector<int> &v)
@@ -143,12 +151,11 @@ int main()
         std::string input;
         getline(std::cin, input);
 
-        std::cout << input << std::endl;
+        // std::cout << input << std::endl;
         readVector(v, input);
-        std::cout << printVector(v) << std::endl;
+        std::cout << "Vetor: " << printVector(v) << std::endl << std::endl << std::endl;
 
         treeNode tree = getTree(v);
-        tree.print();
 
         std::vector<std::vector<int> > table;
         std::vector<int> empty;
@@ -156,7 +163,6 @@ int main()
         getAllVectors(tree, table, empty);
 
         filterMax(table);
-        std::cout << "test" << std::endl;
 
         for(int i = 0; i < table.size(); i++) {
             std::cout << printVector(table[i]) << std::endl;
