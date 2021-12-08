@@ -1,6 +1,3 @@
-#include <iostream>
-#include <vector>
-#include <string>
 #include "tree.h"
 
 std::vector<int> readVector(std::vector<int> &v, std::string input)
@@ -45,7 +42,12 @@ void printVector(std::vector<int> vector)
 
 int main()
 {
-    int option = 1;
+    int option;
+
+    char opt;
+    opt = getchar();
+    option = opt - 48;
+    getchar();
 
     std::vector<int> v;
 
