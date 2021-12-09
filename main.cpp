@@ -6,7 +6,7 @@ std::vector<int> readVector(std::vector<int> &v, std::string input)
 {
     int token = 0;
 
-    for (int i = 0; i < input.size(); i++)
+    for (size_t i = 0; i < input.size(); i++)
     {
         if (input[i] != ' ')
         {
@@ -31,7 +31,7 @@ void printVector(std::vector<int> vector)
 {
     std::string out;
 
-    for (int i = 0; i < vector.size(); i++)
+    for (size_t i = 0; i < vector.size(); i++)
     {
         std::cout << vector[i];
         std::cout << ',';
