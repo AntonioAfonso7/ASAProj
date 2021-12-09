@@ -44,9 +44,7 @@ void printVector(std::vector<int> vector)
 int main()
 {
     int option;
-    int count = 0;
     std::string option_line;
-    char opt;
 
     std::getline(std::cin, option_line);
     option = option_line[0] - 48; // ascii conversion to int
@@ -66,7 +64,11 @@ int main()
         std::vector<std::vector<int> > table;
         std::vector<int> empty;
 
-        getAllVectors(tree, table, empty);
+        getLongestVectors(tree, table, empty);
+        for(int i = 0; i < table.size(); i++)
+        {
+            printVector(table[i]);
+        }
         filterMax(table);
 
         int number_seq = table.size();
@@ -77,7 +79,6 @@ int main()
 
     if (option == 2)
     {
-        bool success;
         bool first = true;
         int nsize = 0;
         int nvectors = 0;
@@ -103,15 +104,6 @@ int main()
 
         int number_seq1 = table1.size();
         int number_seq2 = table2.size();
-
-        int size_seq1 = table1[0].size();
-        int size_seq2 = table2[0].size();
-
-        std::cout << std::endl;
-
-        // printTree(t1);
-        // std::cout << std::endl;
-        // printTree(t2);
 
         for (int i = 0; i < number_seq1; i++)
         {
@@ -139,8 +131,7 @@ int main()
                 nvectors = 1; // back to default 1
             }
         }
-        std::cout << "------------------" << std::endl
-                  << nsize << " " << nvectors << std::endl;
+        std::cout << nsize << " " << nvectors << std::endl;
     }
 
     return 0;
