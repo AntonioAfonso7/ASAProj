@@ -16,6 +16,7 @@ public:
     void setValue(int n);
     void insert(treeNode &t, int n);
     std::vector<treeNode> getSons();
+    void printTree(treeNode t);
     int getValue();
     void print();
 }; 

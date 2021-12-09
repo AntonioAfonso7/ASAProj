@@ -9,5 +9,6 @@
 treeNode getTree(std::vector<int> &v);
 void filterMax(std::vector<std::vector<int> > &table);
 void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector<int> curArr);
+void printTree(treeNode t);
 
 #endif

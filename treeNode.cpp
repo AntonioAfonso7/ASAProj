@@ -5,7 +5,8 @@ treeNode::treeNode(int n)
     setValue(n);
 }
 
-void treeNode::setValue(int n) {
+void treeNode::setValue(int n)
+{
     value = n;
 }
 
@@ -51,5 +52,27 @@ void treeNode::insert(treeNode &t, int n)
             }
         }
         t.sons.push_back(treeNode(n));
+    }
+}
+
+void treeNode::printTree(treeNode t)
+{
+    if (t.sons.empty())
+    {
+        std::cout << t.value << " ";
+    }
+    else
+    {
+        std::cout << t.value << "-> ";
+        for (int i = 0; i < t.sons.size(); i++)
+        {
+            std::cout << t.sons[i].value << " ";
+        }
+        std::cout << std::endl;
+
+        for (int i = 0; i < t.sons.size(); i++)
+        {
+            printTree(t.sons[i]);
+        }
     }
 }

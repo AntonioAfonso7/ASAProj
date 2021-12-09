@@ -9,10 +9,11 @@ void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector
     }
     else
     {
+        std::vector<int> tmp(curArr);
+        tmp.push_back(t.treeNode::getValue());
+        dest.push_back(tmp);
         for (int i = 0; i < t.treeNode::getSons().size(); i++)
         {
-            std::vector<int> tmp(curArr);
-            tmp.push_back(t.treeNode::getValue());
             getAllVectors(t.treeNode::getSons()[i], dest, tmp);
         }
     }
@@ -51,4 +52,9 @@ treeNode getTree(std::vector<int> &v)
         tree.treeNode::insert(tree, v[i]);
     }
     return tree;
+}
+
+void printTree(treeNode t)
+{
+    t.treeNode::printTree(t);
 }
