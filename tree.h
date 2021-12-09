@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <limits>
+#include <sstream>
 #include "treeNode.h"
 
 treeNode getTree(std::vector<int> &v);

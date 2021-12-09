@@ -1,27 +1,14 @@
 #include "tree.h"
-#include <string>
-#include <iostream>
 
 std::vector<int> readVector(std::vector<int> &v, std::string input)
 {
-    int token = 0;
+    int n;
 
-    for (size_t i = 0; i < input.size(); i++)
+    std::istringstream c(input);
+
+    while (c >> n)
     {
-        if (input[i] != ' ')
-        {
-            token = token * 10;
-            token += (input[i] - 48);
-        }
-        else
-        {
-            v.push_back(token);
-            token = 0;
-        }
-    }
-    if (token != 0)
-    {
-        v.push_back(token);
+        v.push_back(n);
     }
 
     return v;
