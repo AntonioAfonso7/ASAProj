@@ -52,12 +52,6 @@ int main()
         std::vector<int> empty;
 
         getLongestVectors(tree, table, empty);
-
-        for (size_t i = 0; i < table.size(); i++)
-        {
-            printVector(table[i]);
-        }
-
         filterMax(table);
 
         int number_seq = table.size();
@@ -68,9 +62,7 @@ int main()
 
     if (option == 2)
     {
-        bool first = true;
-        size_t nsize = 0;
-        int nvectors = 0;
+        int nsize = 0;
         std::string input1;
         std::string input2;
         getline(std::cin, input1);
@@ -82,9 +74,10 @@ int main()
         treeNode t1 = getTree(v1);
         treeNode t2 = getTree(v2);
 
+        std::vector<std::vector<int> > vfinal;
         std::vector<std::vector<int> > table1;
         std::vector<std::vector<int> > table2;
-        std::vector<std::vector<int> > vfinal;
+
         std::vector<int> empty1;
         std::vector<int> empty2;
 
@@ -102,25 +95,21 @@ int main()
                     vfinal.push_back(table1[i]);
             }
         }
+
         if (vfinal.size() == 0)
         {
-            std::cout << "0 0" << std::endl;
+            std::cout << "0" << std::endl;
         }
 
-        for (size_t i = 0; i < vfinal.size(); i++)
+        nsize = vfinal[0].size();
+        for (int i = 1; i < vfinal.size(); i++)
         {
-            if (first)
-                nsize = vfinal[0].size();
-            first = false;
-            if (vfinal[i].size() == nsize)
-                nvectors++;
             if (vfinal[i].size() > nsize)
             {
                 nsize = vfinal[i].size();
-                nvectors = 1; // back to default 1
             }
         }
-        std::cout << nsize << " " << nvectors << std::endl;
+        std::cout << nsize << std::endl;
     }
 
     return 0;

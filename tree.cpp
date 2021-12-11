@@ -7,7 +7,7 @@ void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector
         curArr.push_back(t.getValue());
         dest.push_back(curArr);
     }
-    else if (t.getValue() == 0)
+    else if (t.isRoot())  // The node we are currently in is the root
     {
         std::vector<int> tmp(curArr);
         dest.push_back(tmp);
@@ -17,7 +17,7 @@ void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector
         }
     }
     
-    else
+    else                // The node we are currently in is not the root
     {
         std::vector<int> tmp(curArr);
         tmp.push_back(t.getValue());
@@ -36,21 +36,22 @@ void getLongestVectors(treeNode t, std::vector<std::vector<int> > &dest, std::ve
         curArr.push_back(t.getValue());
         dest.push_back(curArr);
     }
-    else if (t.getValue() == 0)
+    else if (!t.isRoot())   // When the node we are currently in is not the root
     {
-        std::vector<int> tmp(curArr);
         for (size_t i = 0; i < t.getSons().size(); i++)
         {
+            std::vector<int> tmp(curArr);
+            tmp.push_back(t.getValue());
             getLongestVectors(t.getSons()[i], dest, tmp);
         }
     }
     
-    else
+    else                    // When the node we are currently in is the root
     {
+        std::vector<int> tmp(curArr);
         for(size_t i = 0; i < t.getSons().size(); i++)
-        {
-            std::vector<int> tmp(curArr);
-            tmp.push_back(t.getValue());
+        {  
+            std::cout << "ola";
             getLongestVectors(t.getSons()[i], dest, tmp);
         }
     }
@@ -59,7 +60,7 @@ void getLongestVectors(treeNode t, std::vector<std::vector<int> > &dest, std::ve
 void filterMax(std::vector<std::vector<int> > &table)
 {
     std::vector<std::vector<int> > tmp;
-    size_t max_size = table[0].size(); // By the algorithm we know the first vector is the biggest
+    size_t max_size = table[0].size();
 
     for (size_t i = 0; i < table.size(); i++)
     {
@@ -82,8 +83,7 @@ void filterMax(std::vector<std::vector<int> > &table)
 
 treeNode getTree(std::vector<int> &v)
 {
-    int negative_infinity = -std::numeric_limits<int>::infinity();
-    treeNode tree(negative_infinity);
+    treeNode tree(0, true); //Creates a tree node that will be the root
 
     for (size_t i = 0; i < v.size(); i++)
     {

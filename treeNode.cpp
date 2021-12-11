@@ -3,6 +3,18 @@
 treeNode::treeNode(int n)
 {
     setValue(n);
+    root = false;
+}
+
+treeNode::treeNode(int n, bool b)
+{
+    setValue(n);
+    root = b;
+}
+
+bool treeNode::isRoot()
+{
+    return root;
 }
 
 void treeNode::setValue(int n)

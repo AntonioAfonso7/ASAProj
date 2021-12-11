@@ -4,13 +4,13 @@ main: main.o treeNode.o tree.o
 	g++ $(CFLAGS) main.o tree.o treeNode.o -lm -o main
 
 main.o: main.cpp
-	g++ $(CFLAGS) -c -lm main.cpp
+	g++ $(CFLAGS) -c main.cpp
 
 tree.o: tree.cpp tree.h
-	g++ $(CFLAGS) -c -lm tree.cpp 
+	g++ $(CFLAGS) -c tree.cpp 
 
 treeNode.o: treeNode.cpp treeNode.h
-	g++ $(CFLAGS) -c -lm treeNode.cpp
+	g++ $(CFLAGS) -c treeNode.cpp
 
 clean:
 	rm -rf *.out *.out.dSYM *.dSYM *.o
