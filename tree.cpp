@@ -11,7 +11,7 @@ void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector
     {
         std::vector<int> tmp(curArr);
         dest.push_back(tmp);
-        for (int i = 0; i < t.getSons().size(); i++)
+        for (size_t i = 0; i < t.getSons().size(); i++)
         {
             getAllVectors(t.getSons()[i], dest, tmp);
         }
@@ -22,7 +22,7 @@ void getAllVectors(treeNode t, std::vector<std::vector<int> > &dest, std::vector
         std::vector<int> tmp(curArr);
         tmp.push_back(t.getValue());
         dest.push_back(tmp);
-        for (int i = 0; i < t.getSons().size(); i++)
+        for (size_t i = 0; i < t.getSons().size(); i++)
         {
             getAllVectors(t.getSons()[i], dest, tmp);
         }
@@ -39,7 +39,7 @@ void getLongestVectors(treeNode t, std::vector<std::vector<int> > &dest, std::ve
     else if (t.getValue() == 0)
     {
         std::vector<int> tmp(curArr);
-        for (int i = 0; i < t.getSons().size(); i++)
+        for (size_t i = 0; i < t.getSons().size(); i++)
         {
             getLongestVectors(t.getSons()[i], dest, tmp);
         }
@@ -47,7 +47,7 @@ void getLongestVectors(treeNode t, std::vector<std::vector<int> > &dest, std::ve
     
     else
     {
-        for(int i = 0; i < t.getSons().size(); i++)
+        for(size_t i = 0; i < t.getSons().size(); i++)
         {
             std::vector<int> tmp(curArr);
             tmp.push_back(t.getValue());
@@ -59,9 +59,17 @@ void getLongestVectors(treeNode t, std::vector<std::vector<int> > &dest, std::ve
 void filterMax(std::vector<std::vector<int> > &table)
 {
     std::vector<std::vector<int> > tmp;
-    int max_size = table[0].size(); // By the algorithm we know the first vector is the biggest
+    size_t max_size = table[0].size(); // By the algorithm we know the first vector is the biggest
 
-    for (int i = 0; i < table.size(); i++)
+    for (size_t i = 0; i < table.size(); i++)
+    {
+        if (table[i].size() > max_size)
+        {
+            max_size = table[i].size();
+        }
+    }
+
+    for (size_t i = 0; i < table.size(); i++)
     {
         if (table[i].size() == max_size)
         {
@@ -77,7 +85,7 @@ treeNode getTree(std::vector<int> &v)
     int negative_infinity = -std::numeric_limits<int>::infinity();
     treeNode tree(negative_infinity);
 
-    for (int i = 0; i < v.size(); i++)
+    for (size_t i = 0; i < v.size(); i++)
     {
         tree.treeNode::insert(tree, v[i]);
     }

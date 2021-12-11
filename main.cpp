@@ -52,10 +52,12 @@ int main()
         std::vector<int> empty;
 
         getLongestVectors(tree, table, empty);
-        for(int i = 0; i < table.size(); i++)
+
+        for (size_t i = 0; i < table.size(); i++)
         {
             printVector(table[i]);
         }
+
         filterMax(table);
 
         int number_seq = table.size();
@@ -67,7 +69,7 @@ int main()
     if (option == 2)
     {
         bool first = true;
-        int nsize = 0;
+        size_t nsize = 0;
         int nvectors = 0;
         std::string input1;
         std::string input2;
@@ -105,7 +107,7 @@ int main()
             std::cout << "0 0" << std::endl;
         }
 
-        for (int i = 0; i < vfinal.size(); i++)
+        for (size_t i = 0; i < vfinal.size(); i++)
         {
             if (first)
                 nsize = vfinal[0].size();

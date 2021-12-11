@@ -24,13 +24,13 @@ void treeNode::print()
 {
     std::cout << value << " -> ";
 
-    for (int i = 0; i < sons.size(); i++)
+    for (size_t i = 0; i < sons.size(); i++)
     {
         std::cout << sons[i].value << " | ";
     }
     std::cout << std::endl;
 
-    for (int i = 0; i < sons.size(); i++)
+    for (size_t i = 0; i < sons.size(); i++)
     {
         sons[i].print();
     }
@@ -44,7 +44,7 @@ void treeNode::insert(treeNode &t, int n)
     }
     else
     {
-        for (int i = 0; i < t.sons.size(); i++)
+        for (size_t i = 0; i < t.sons.size(); i++)
         {
             if (t.sons[i].value < n)
             {
@@ -64,13 +64,13 @@ void treeNode::printTree(treeNode t)
     else
     {
         std::cout << t.value << "-> ";
-        for (int i = 0; i < t.sons.size(); i++)
+        for (size_t i = 0; i < t.sons.size(); i++)
         {
             std::cout << t.sons[i].value << " ";
         }
         std::cout << std::endl;
 
-        for (int i = 0; i < t.sons.size(); i++)
+        for (size_t i = 0; i < t.sons.size(); i++)
         {
             printTree(t.sons[i]);
         }
