@@ -1,4 +1,5 @@
 #include "tree.h"
+#include "matrix.h"
 
 std::vector<int> readVector(std::vector<int> &v, std::string input)
 {
@@ -62,7 +63,6 @@ int main()
 
     if (option == 2)
     {
-        int nsize = 0;
         std::string input1;
         std::string input2;
         getline(std::cin, input1);
@@ -71,44 +71,8 @@ int main()
         readVector(v1, input1);
         readVector(v2, input2);
 
-        treeNode t1 = getTree(v1);
-        treeNode t2 = getTree(v2);
+        int nsize = getLICSSize(v1, v2);
 
-        std::vector<std::vector<int> > vfinal;
-        std::vector<std::vector<int> > table1;
-        std::vector<std::vector<int> > table2;
-
-        std::vector<int> empty1;
-        std::vector<int> empty2;
-
-        getAllVectors(t1, table1, empty1);
-        getAllVectors(t2, table2, empty2);
-
-        int number_seq1 = table1.size();
-        int number_seq2 = table2.size();
-
-        for (int i = 0; i < number_seq1; i++)
-        {
-            for (int j = 0; j < number_seq2; j++)
-            {
-                if (table2[j] == table1[i])
-                    vfinal.push_back(table1[i]);
-            }
-        }
-
-        if (vfinal.size() == 0)
-        {
-            std::cout << "0" << std::endl;
-        }
-
-        nsize = vfinal[0].size();
-        for (int i = 1; i < vfinal.size(); i++)
-        {
-            if (vfinal[i].size() > nsize)
-            {
-                nsize = vfinal[i].size();
-            }
-        }
         std::cout << nsize << std::endl;
     }
 

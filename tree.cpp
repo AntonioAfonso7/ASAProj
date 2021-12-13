@@ -51,7 +51,6 @@ void getLongestVectors(treeNode t, std::vector<std::vector<int> > &dest, std::ve
         std::vector<int> tmp(curArr);
         for(size_t i = 0; i < t.getSons().size(); i++)
         {  
-            std::cout << "ola";
             getLongestVectors(t.getSons()[i], dest, tmp);
         }
     }
